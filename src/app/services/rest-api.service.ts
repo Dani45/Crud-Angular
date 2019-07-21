@@ -10,10 +10,12 @@ import { retry, catchError, tap } from 'rxjs/operators';
 })
 
 export class RestApiService {
-
+  id: string = '';
+  url: string = '';
+  value: string = '';
   // Define API
   apiURL = 'https://api.chucknorris.io/jokes/random';
-
+  apiURLG = 'http://localhost:3000/employees';
   constructor(private http: HttpClient) { }
 
   /*========================================
@@ -27,6 +29,11 @@ export class RestApiService {
     })
   }
 
+  /*========================================
+ methodos para traer y fuardar desde api rest
+=========================================*/
+
+
   // HttpClient API get() method => Fetch employees list
   getEmployees(): Observable<Employee> {
     return this.http.get<Employee>(this.apiURL)
@@ -36,43 +43,15 @@ export class RestApiService {
       )
   }
 
-
-
-  // HttpClient API get() method => Fetch employee
-  getEmployee(id): Observable<Employee> {
-    return this.http.get<Employee>(this.apiURL + id)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
-
   // HttpClient API post() method => Create employee
-  createEmployee(employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiURL , JSON.stringify(employee), this.httpOptions)
+  createEmployee(Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.apiURLG , JSON.stringify(Employee), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
 
-  // HttpClient API put() method => Update employee
-  updateEmployee(id, employee): Observable<Employee> {
-    return this.http.put<Employee>(this.apiURL  + id, JSON.stringify(employee), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
-
-  // HttpClient API delete() method => Delete employee
-  deleteEmployee(id) {
-    return this.http.delete<Employee>(this.apiURL + id, this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
 
   // Error handling 
   handleError(error) {

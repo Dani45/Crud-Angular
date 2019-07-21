@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 import { Employee } from '../model/employee';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees-list',
@@ -12,7 +13,8 @@ export class EmployeesListComponent implements OnInit {
 
 
   constructor(
-    private restApi: RestApiService
+    private restApi: RestApiService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -32,13 +34,12 @@ export class EmployeesListComponent implements OnInit {
     })
   }
 
-  // Delete employee
-  deleteEmployee(id) {
-    if (window.confirm('Are you sure, you want to delete?')) {
-      this.restApi.deleteEmployee(id).subscribe(data => {
-        this.loadEmployees()
-      })
-    }
+  addEmployee(dataEmployee) {
+    this.restApi.createEmployee(this.Employee).subscribe((data: {}) => {
+      this.router.navigate(['/employees-list'])
+      console.log(data); 
+    })
   }
+
 
 }

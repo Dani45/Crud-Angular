@@ -13,11 +13,13 @@ import { FormsModule } from '@angular/forms';
 
 // Components
 import { EmployeesListComponent } from './employees-list/employees-list.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesListComponent,
+    EmployeeDetailsComponent,
 
   ],
   imports: [
