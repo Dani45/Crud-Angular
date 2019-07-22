@@ -9,24 +9,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 // Forms module
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Components
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeesSearchComponent } from './employees-search/employees-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesListComponent,
     EmployeeDetailsComponent,
+    EmployeesSearchComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule, ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
