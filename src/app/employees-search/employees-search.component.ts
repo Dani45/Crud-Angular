@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs/operato
 })
 export class EmployeesSearchComponent implements OnInit {
   private loading: boolean = false;
-  private Employee: Observable<Employee>;
+  private employees: Observable<Employee[]>;
   private searchField: FormControl;
 
   constructor(private restsApi: RestsApiService) { }
@@ -24,7 +24,7 @@ export class EmployeesSearchComponent implements OnInit {
   cargar() {
     this.searchField = new FormControl();
 
-    this.Employee = this.searchField.valueChanges.pipe(
+    this.employees = this.searchField.valueChanges.pipe(
       debounceTime(400),
       distinctUntilChanged(),
       tap(_ => (this.loading = true)),

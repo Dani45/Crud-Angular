@@ -11,5 +11,6 @@ export class Employee {
     id: string;
     url: string;
     value: string;
+    total: number;
 
 }
