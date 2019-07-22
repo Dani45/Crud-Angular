@@ -4,13 +4,29 @@
     </div>
 </form>
 
-<div class="text-center">
-    <p class="lead" *ngIf="loading">Loading...</p>
+
+
+<div *ngIf="employees | async as Employee">
+    <div class="container custom-container-2">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">VALUE</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{Employee.id}}</td>
+                        <td>{{Employee.url}}</td>
+                        <td>{{Employee.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>
-
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let employee of employees | async">
-        <p>{{employee.id}}</p>
-
-    </li>
-</ul>

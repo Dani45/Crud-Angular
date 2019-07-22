@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable, } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { Employee } from '../model/employee';
 import { retry, catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,33 +13,22 @@ import { throwError } from 'rxjs';
 export class RestsApiService {
   apiRoot: string = "https://api.chucknorris.io/jokes/search";
 
-
   constructor(private http: HttpClient) { }
-
-  // search(query: string): Observable<Employee> {
-  //   let apiURL = `${this.apiURLo}?query=${query}`;
-  //   console.log( apiURL)
-  //   return this.http.get<Employee>(apiURL)
-  //     .pipe(
-  //       retry(1),
-  //       catchError(this.handleError)
-  //     )
-  // }
-
-
   search(query: string): Observable<any> {
-   
+
     if (!query || query === '*') {
       query = '';
     } else {
       query = query.toLowerCase();
     }
-     return this.http.get( `${this.apiRoot}?query=${query}`).
-     pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
+    return this.http.get(`${this.apiRoot}?query=${query}`).
+      pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
   }
+
+
 
   // Error handling 
   handleError(error) {
